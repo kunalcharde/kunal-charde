@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+/*
+  Palette
+  Mirage #16232A · Blaze Orange #FF5B04 · Deep Sea Green #075056 · Wild Sand #E4EEF0
+*/
+@theme {
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Archivo Variable", "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-mirage: #16232a;
+  --color-mirage-2: #1e2f37;
+  --color-mirage-3: #2a3d46;
+  --color-blaze: #ff5b04;
+  --color-blaze-ink: #c74300; /* orange dark enough for small text on Wild Sand */
+  --color-sea: #075056;
+  --color-sea-2: #0b666d;
+  --color-sand: #e4eef0;
+  --color-sand-2: #eef4f5;
+  --color-paper: #f7fafb;
+
+  --color-bg: var(--color-sand);
+  --color-fg: var(--color-mirage);
+  --color-muted: #4b5d65;
+  --color-subtle: #6f8188;
+  --color-line: #c3d2d6;
+  --color-line-soft: #d4e0e3;
+
+  --animate-dash: dash 3.2s linear infinite;
+  --animate-spin-slow: spin 90s linear infinite;
+  --animate-spin-rev: spin-rev 60s linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes dash {
+    to {
+      stroke-dashoffset: -40;
+    }
+  }
+  @keyframes spin-rev {
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-blaze);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-blaze);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}
+
+/* Wide, uppercase poster type */
+@utility display {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+}
+@utility label {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 11px;
+  line-height: 1.15;
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-[11px] font-medium tracking-[0.18em] text-muted uppercase;
+  }
+  .section-title {
+    @apply display text-[2.1rem] text-balance sm:text-5xl md:text-6xl;
+  }
+  .section-lead {
+    @apply mt-5 max-w-2xl text-base leading-relaxed text-muted text-pretty sm:text-lg;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-paper;
+  }
+  /* Fill is cleared separately so the stroke can still follow the text colour. */
+  .text-outline {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1.5px currentColor;
+  }
+}
+
+/* "PORTFOLIO" wave: each letter is drawn twice (solid over outline) and the two swap in a travelling wave. */
+.wave-letter {
+  position: relative;
+  display: inline-block;
+}
+.wave-letter > span {
+  display: block;
+  transform-origin: 50% 100%;
+  animation: wave-top 3.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  animation-delay: calc(var(--i) * 0.11s);
+}
+.wave-letter > span + span {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 0%;
+  animation-name: wave-bottom;
+}
+@keyframes wave-top {
+  0%,
+  100% {
+    color: var(--color-mirage);
+    -webkit-text-stroke: 1.5px var(--color-mirage);
+    transform: translateY(-0.28em) scaleY(1);
+  }
+  50% {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-mirage);
+    transform: translateY(-0.28em) scaleY(0.55);
+  }
+}
+@keyframes wave-bottom {
+  0%,
+  100% {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-mirage);
+    transform: translateY(0.62em) scaleY(0.55);
+  }
+  50% {
+    color: var(--color-mirage);
+    -webkit-text-stroke: 1.5px var(--color-mirage);
+    transform: translateY(0.62em) scaleY(1);
+  }
+}
