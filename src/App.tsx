@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect } from "react";
 import { MotionConfig } from "framer-motion";
+import { Analytics } from "@vercel/analytics/react";
 import { BrowserRouter, Outlet, Route, Routes, useLocation } from "react-router";
 import { Footer } from "./components/layout/Footer";
 import { Navbar } from "./components/layout/Navbar";
@@ -56,6 +57,8 @@ function Layout() {
       {/* Experience + domains strip sits above the footer on every page */}
       <TrustBar />
       <Footer />
+      {/* Vercel Web Analytics: page views across every route */}
+      <Analytics />
     </>
   );
 }
