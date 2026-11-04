@@ -197,7 +197,7 @@ function SideScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number; 
                 >
                   <div className="flex items-center justify-between">
                     <s.icon className="h-5 w-5 text-blaze" aria-hidden />
-                    <span className="font-mono text-[10px] text-sand/45">MANIFEST {String(i + 1).padStart(2, "0")}/{String(services.length).padStart(2, "0")}</span>
+                    <span className="font-sans text-[10px] font-semibold tracking-wider text-sand/45">MANIFEST {String(i + 1).padStart(2, "0")}/{String(services.length).padStart(2, "0")}</span>
                   </div>
                   <p className="label mt-auto text-[13px] leading-snug">{s.title}</p>
                   <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-sand/60">{s.items.join(" · ")}</p>
@@ -328,7 +328,7 @@ function Gate({ p, g, i, y }: { p: MotionValue<number>; g: Geo; i: number; y: nu
       >
         <div className="flex items-baseline justify-between">
           <span className="font-mono text-xs text-blaze-ink">0{i + 1}</span>
-          <span className="font-mono text-[10px] tracking-wider text-subtle uppercase">Checkpoint</span>
+          <span className="font-sans text-[10px] font-semibold tracking-wider text-subtle uppercase">Checkpoint</span>
         </div>
         <h3 className="display mt-2 text-xl sm:text-2xl">{m.title}</h3>
         <p className="mt-1.5 text-[13px] leading-relaxed text-muted">{m.description}</p>
