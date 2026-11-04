@@ -265,3 +265,20 @@ export const projectTypes = [
 ];
 
 export const budgets = ["Under $2,000", "$2,000 to $5,000", "$5,000 to $15,000", "$15,000+", "Not sure yet"];
+
+// Cards on the Services page arc. Real things I've built (from my own projects), described without client names.
+// When real client quotes are available, they can replace these one for one.
+export const projectNotes = [
+  { sector: "Legal Tech", kind: "AI platform", text: "Brought judgments from all 24 High Courts and the Supreme Court into one search, with AI summaries lawyers can check line by line." },
+  { sector: "Enterprise CRM", kind: "Web + mobile", text: "Gave field teams one app for customers, sampling and orders, with approvals everyone can follow from start to finish." },
+  { sector: "AI Infrastructure", kind: "RAG assistant", text: "Turned SOPs, FAQs and old tickets into assistants teams trust, answering in Slack, Teams and on the web." },
+  { sector: "Healthcare", kind: "Progressive web apps", text: "Built patient and clinician apps that meet national health standards, from consent all the way to records." },
+  { sector: "FinTech", kind: "Website", text: "Designed a lending website that matches each borrower with one best-fit lender instead of a confusing list." },
+  { sector: "Legal Tech", kind: "WhatsApp assistant", text: "Put legal research inside WhatsApp, the app lawyers already have open all day." },
+  { sector: "Enterprise CRM", kind: "Integration", text: "Connected SAP to a modern sales platform with scheduled, validated syncs that keep working even when SAP is down." },
+  { sector: "FinTech", kind: "Web platform", text: "Shipped a digital lending platform with clear loan journeys and an EMI calculator borrowers can play with." },
+  { sector: "Wellness", kind: "Mobile app", text: "Built a calm, guided relaxation app with audio and video sessions for everyday stress." },
+  { sector: "Analytics", kind: "Dashboards", text: "Made reports over 1.7M+ sales records load fast enough to use live in a meeting." },
+  { sector: "AI Infrastructure", kind: "No-code builder", text: "Built a no-code bot builder so every team could shape its own assistant, tone and guardrails included." },
+  { sector: "Health & Wellness", kind: "Brand website", text: "Created a warm, simple website for an Ayurveda wellness brand." },
+];
