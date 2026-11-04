@@ -31,6 +31,9 @@
   --animate-spin-slow: spin 90s linear infinite;
   --animate-spin-rev: spin-rev 60s linear infinite;
   --animate-marquee: marquee 40s linear infinite;
+  --animate-scroll-wheel: scroll-wheel 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  --animate-chevron: chevron 1.8s ease-in-out infinite;
+  --animate-cue-in: cue-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.4s both;
 
   @keyframes dash {
     to {
@@ -40,6 +43,45 @@
   @keyframes spin-rev {
     to {
       transform: rotate(-360deg);
+    }
+  }
+  /* Scroll cue: wheel dot rolling down a mouse outline, chevrons cascading, and a delayed entrance */
+  @keyframes scroll-wheel {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    15% {
+      opacity: 1;
+    }
+    70% {
+      transform: translateY(12px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(12px);
+      opacity: 0;
+    }
+  }
+  @keyframes chevron {
+    0%,
+    100% {
+      opacity: 0.15;
+      transform: translateY(-3px) rotate(45deg);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(3px) rotate(45deg);
+    }
+  }
+  @keyframes cue-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
   @keyframes marquee {

@@ -147,6 +147,8 @@ function SideScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number; 
     lerp(w * 0.55, -(services.length * cardStep - w * (g.mobile ? 0.9 : 0.95)), seg(v, T.manifest[0], T.manifest[1])),
   );
   const fill = useTransform(p, (v) => seg(v, T.fill[0], T.fill[1]));
+  // The scroll cue bows out as soon as the visitor starts scrolling.
+  const cueO = useTransform(p, (v) => 1 - seg(v, 0.004, 0.035));
   const legW = Math.max(8, g.TW * 0.022);
   // The gantry straddles the whole rig so its legs never cross the cab.
   const legL = g.truckX - g.TW * 0.04;
@@ -252,6 +254,29 @@ function SideScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number; 
           className="absolute h-[5px] bg-mirage"
           style={{ left: g.conX + g.CW * 0.15, width: g.CW * 0.7, top: useTransform(conTop, (v) => v - 5) }}
         />
+      </motion.div>
+
+      {/* Scroll cue on the road, under the truck */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 -translate-x-1/2"
+        style={{ opacity: cueO, top: g.groundY + (h - g.groundY) * 0.42 - 44 }}
+      >
+        <div className="flex animate-cue-in flex-col items-center gap-3 text-sand">
+          <span className="relative hidden h-11 w-7 rounded-full border-2 border-sand/45 sm:block">
+            <span className="absolute top-2 left-1/2 -ml-[2px] h-2.5 w-1 animate-scroll-wheel rounded-full bg-blaze" />
+          </span>
+          <span className="flex flex-col items-center">
+            {[0, 1, 2].map((k) => (
+              <span
+                key={k}
+                className="-mt-1 h-2.5 w-2.5 animate-chevron border-r-2 border-b-2 border-sand/80"
+                style={{ animationDelay: `${k * 0.18}s` }}
+              />
+            ))}
+          </span>
+          <span className="font-mono text-[10px] tracking-[0.35em] text-sand/60 uppercase">Scroll</span>
+        </div>
       </motion.div>
 
       {/* Darkness rising over the sky before the camera flips to top-down */}
