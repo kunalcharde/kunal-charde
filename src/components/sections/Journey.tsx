@@ -184,8 +184,8 @@ function SideScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number; 
                 Everything your idea needs. <span className="text-sand/35">Looked after by one person.</span>
               </h3>
               <p className="hidden max-w-md text-sm leading-relaxed text-sand/65 lg:block">
-                Web apps, AI, backend, automation, cloud and mobile. Whatever your idea needs, we build it together, and I
-                look after every piece of it like it's my own.
+                Web apps, AI, backend, automation, cloud and mobile. Whatever your idea needs, we shape it together, and I
+                look after every piece of it with real care.
               </p>
             </div>
             <motion.ul className="absolute flex gap-4" style={{ x: manifestX, top: h * (g.mobile ? 0.27 : 0.31), left: 0 }}>
@@ -506,8 +506,8 @@ function Overlays({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number; h
           Software that works <span className="text-blaze">as hard as you do.</span>
         </h3>
         <p className="mt-5 max-w-lg text-sm leading-relaxed text-sand/75 sm:text-base">
-          Built with you, cared for like my own, and looked after long after launch. Bring me your idea and let's take it
-          the rest of the way together.
+          Made with you, cared for at every step, and looked after long after launch. Bring me your idea and let's take
+          it the rest of the way together.
         </p>
         <ButtonLink href="/contact" variant="accent" size="lg" className="mt-8">
           Let's build it together

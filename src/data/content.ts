@@ -280,7 +280,7 @@ export const reasons = [
   { title: "Your problem comes first", description: "Before talking about technology, I want to understand what you're trying to make better and why it matters to you." },
   { title: "I stay with it", description: "From the first idea to launch and after. You won't be handed between people; I'm with your product the whole way." },
   { title: "AI where it truly helps", description: "I'll be honest about where AI makes your product better and where something simpler will serve you well." },
-  { title: "Built like it's my own", description: "Clean, tested and documented, because I care how it holds up long after we've shipped it." },
+  { title: "Made with real care", description: "Clean, tested and documented, because I care how it holds up long after we've shipped it." },
   { title: "Room to grow", description: "We'll build it so it can grow with you, more users, more data, more ideas, without starting over." },
   { title: "You're never in the dark", description: "Regular updates, honest timelines and decisions explained in plain language. Ask me anything, anytime." },
 ];

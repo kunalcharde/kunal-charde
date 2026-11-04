@@ -83,8 +83,8 @@ export function About() {
 
           <Reveal delay={0.08}>
             <p className="mt-8 text-base leading-relaxed font-medium text-mirage sm:text-lg">
-              Your product might start as yours, but once we begin, it becomes a little bit mine too. I'll care about the
-              details, check in often, and stay with it long after it goes live. We're building this together.
+              I'll care about the details as much as you do, keep you in the loop at every step, and stay with your
+              product long after it goes live. We're in this together.
             </p>
           </Reveal>
 
