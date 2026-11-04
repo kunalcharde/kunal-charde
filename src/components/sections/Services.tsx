@@ -28,7 +28,7 @@ function CardBody({ s, i }: { s: Service; i: number }) {
           <span className="label text-[11px] opacity-70">Services</span>
           <span className="font-mono text-sm opacity-70">({String(i + 1).padStart(2, "0")})</span>
         </div>
-        <h3 className="display mt-6 text-[1.9rem] text-balance sm:text-5xl">{s.title}</h3>
+        <h3 className="display mt-6 text-[1.45rem] text-balance break-words sm:text-4xl lg:text-5xl">{s.title}</h3>
         <p className={`mt-5 max-w-xl text-[15px] leading-relaxed sm:text-lg ${t.muted}`}>{s.description}</p>
         <ul className="mt-6 flex flex-wrap gap-1.5">
           {s.items.map((item) => (
@@ -82,7 +82,7 @@ function ServiceStack() {
   const n = services.length;
 
   return (
-    <div ref={ref} className="relative" style={{ height: `${n * 85 + 15}vh` }}>
+    <div ref={ref} className="relative" style={{ height: `${n * 70 + 30}vh` }}>
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <div className="container-page relative h-[76vh] max-h-[720px] sm:h-[70vh]">
           {services.map((s, i) => (

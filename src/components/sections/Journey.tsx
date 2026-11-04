@@ -195,7 +195,7 @@ function SideScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number; 
                 >
                   <div className="flex items-center justify-between">
                     <s.icon className="h-5 w-5 text-blaze" aria-hidden />
-                    <span className="font-mono text-[10px] text-sand/45">MANIFEST 0{i + 1}/0{services.length}</span>
+                    <span className="font-mono text-[10px] text-sand/45">MANIFEST {String(i + 1).padStart(2, "0")}/{String(services.length).padStart(2, "0")}</span>
                   </div>
                   <p className="label mt-auto text-[13px] leading-snug">{s.title}</p>
                   <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-sand/60">{s.items.join(" · ")}</p>

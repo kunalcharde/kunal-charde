@@ -3,9 +3,13 @@ import {
   AppWindow,
   BrainCircuit,
   Cloud,
+  Gauge,
+  Palette,
+  Puzzle,
   Server,
   Smartphone,
   Workflow,
+  Wrench,
 } from "lucide-react";
 
 export const profile = {
@@ -40,6 +44,13 @@ export const services: Service[] = [
     items: ["Business dashboards", "CRM & ERP systems", "SaaS platforms", "Admin panels", "Workflow management"],
   },
   {
+    icon: Palette,
+    title: "Website Design",
+    description:
+      "A website that feels like you and makes the right first impression. We shape the story together, then I design and build it to look great on every screen.",
+    items: ["Business & brand websites", "Landing pages", "Portfolio sites", "Responsive design", "Webflow & Framer builds"],
+  },
+  {
     icon: BrainCircuit,
     title: "AI & LLM Solutions",
     description:
@@ -59,6 +70,27 @@ export const services: Service[] = [
     description:
       "We look at the repetitive work eating your team's week, the imports, reports and approvals, and gently hand it over to software.",
     items: ["Process automation", "Data processing workflows", "Reporting automation", "System integrations"],
+  },
+  {
+    icon: Gauge,
+    title: "SEO & Performance Optimisation",
+    description:
+      "If your site is slow or hard to find, we fix that together. Faster pages, cleaner code and solid technical SEO, so the right people find you and stay.",
+    items: ["Technical SEO", "Core Web Vitals", "Page speed & Lighthouse", "Image & code optimisation", "Meta tags & schema"],
+  },
+  {
+    icon: Puzzle,
+    title: "Customisation & Integrations",
+    description:
+      "Already have a site or platform? We can shape it to fit the way you work, with custom features, thoughtful tweaks and connections to the tools you use.",
+    items: ["Custom features", "Theme & template tweaks", "Forms, payments & CRM hookups", "Third-party integrations", "Admin & dashboard changes"],
+  },
+  {
+    icon: Wrench,
+    title: "Website Fixes & Maintenance",
+    description:
+      "Something broken, outdated or just not quite right? I'll find the real cause, fix it properly, and keep your site healthy so you don't have to worry about it.",
+    items: ["Bug fixes", "Broken layouts", "Upgrades & updates", "Security patches", "Ongoing care"],
   },
   {
     icon: Cloud,
@@ -260,7 +292,10 @@ export const projectTypes = [
   "Automation",
   "Cloud & deployment",
   "Mobile app",
-  "Website",
+  "Website design",
+  "SEO & performance",
+  "Customisation",
+  "Fixes & maintenance",
   "Not sure yet",
 ];
 
