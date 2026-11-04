@@ -34,10 +34,11 @@ const T = {
   reveal: [0.42, 0.47],
   travel: [0.42, 0.85],
   heading: [0.55, 0.58, 0.82, 0.85],
-  transfer: [0.86, 0.91],
-  panSea: [0.89, 0.95],
-  sail: [0.91, 0.995],
-  finale: [0.93, 0.97],
+  transfer: [0.855, 0.89],
+  panSea: [0.875, 0.92],
+  sail: [0.89, 0.955],
+  shipped: [0.96, 0.97],
+  finale: [0.97, 0.99],
 } as const;
 
 const HERO_TITLE = `${profile.name}, ${profile.role}. Turning ideas into scalable digital products, together.`;
@@ -355,7 +356,8 @@ function WorldScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number;
   const transferT = useTransform(p, (v) => ease(seg(v, T.transfer[0], T.transfer[1])));
   const onTruck = useTransform(transferT, (t) => (t > 0 ? 0 : 1));
   const sail = useTransform(p, (v) => ease(seg(v, T.sail[0], T.sail[1])));
-  const shipDY = useTransform(sail, (s) => s * h * 1.5);
+  const shipDY = useTransform(sail, (s) => s * h * 1.7);
+  const wakeO = useTransform(sail, (s) => Math.min(1, s * 8));
   const shipDX = useTransform(sail, (s) => s * s * (g.mobile ? w * 0.1 : w * 0.06));
 
   // Flying container: from the truck bed (vertical, heading down) into ship slot 0, then away with the ship.
@@ -382,7 +384,7 @@ function WorldScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number;
       <motion.div className="absolute inset-x-0 top-0" style={{ y: camY, height: worldH }}>
         {/* Sea */}
         <div
-          className="absolute inset-x-0 bg-sea"
+          className="absolute inset-x-0 animate-sea-drift bg-sea"
           style={{
             top: g.seaTop,
             height: worldH - g.seaTop,
@@ -409,11 +411,27 @@ function WorldScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number;
           className="absolute"
           style={{ left: g.shipX, top: g.shipY, width: g.shipW, height: g.shipH, x: shipDX, y: shipDY }}
         >
-          <motion.div
-            aria-hidden
-            className="absolute -top-[30%] left-[10%] h-[40%] w-[80%] rounded-full bg-sand/25 blur-xl"
-            style={{ opacity: sail }}
-          />
+          <motion.div aria-hidden className="pointer-events-none absolute inset-0" style={{ opacity: wakeO }}>
+            {/* Foam wake trailing behind the stern (the ship sails downwards, so the wake fans out above it) */}
+            <svg
+              viewBox="0 0 220 160"
+              preserveAspectRatio="none"
+              className="absolute bottom-[94%] left-[-60%] h-[170%] w-[220%] [mask-image:linear-gradient(to_top,black_35%,transparent)]"
+            >
+              <path d="M110 160 L110 0" stroke="#E4EEF0" strokeOpacity=".12" strokeWidth="30" fill="none" />
+              <path d="M110 160 L110 0" className="animate-wake" stroke="#E4EEF0" strokeOpacity=".35" strokeWidth="6" strokeDasharray="12 12" fill="none" />
+              <path d="M88 160 Q62 80 0 0" className="animate-wake" stroke="#E4EEF0" strokeOpacity=".55" strokeWidth="2.5" strokeDasharray="10 14" fill="none" />
+              <path d="M132 160 Q158 80 220 0" className="animate-wake" stroke="#E4EEF0" strokeOpacity=".55" strokeWidth="2.5" strokeDasharray="10 14" fill="none" />
+            </svg>
+            {/* Ripples spreading out from the hull */}
+            <span className="absolute inset-[-12%] animate-ripple rounded-[48%] border-2 border-sand/30" />
+            <span className="absolute inset-[-12%] animate-ripple rounded-[48%] border-2 border-sand/25 [animation-delay:1.2s]" />
+            {/* Bow wave at the front */}
+            <svg viewBox="0 0 100 40" className="absolute top-[97%] left-[18%] h-[9%] w-[64%]">
+              <path d="M0 0 Q50 46 100 0" stroke="#E4EEF0" strokeOpacity=".6" strokeWidth="3" fill="none" />
+              <path d="M18 4 Q50 30 82 4" stroke="#E4EEF0" strokeOpacity=".35" strokeWidth="2" fill="none" />
+            </svg>
+          </motion.div>
           <TopShip />
         </motion.div>
 
@@ -458,7 +476,8 @@ function WorldScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number;
 
 function Overlays({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number; h: number }) {
   const headingO = useTransform(p, [...T.heading], [0, 1, 1, 0]);
-  const portO = useTransform(p, [0.85, 0.87, 0.91, 0.93], [0, 1, 1, 0]);
+  const portO = useTransform(p, [0.84, 0.86, 0.89, 0.91], [0, 1, 1, 0]);
+  const shippedO = useTransform(p, (v) => seg(v, T.shipped[0], T.shipped[1]));
   const finaleO = useTransform(p, (v) => seg(v, T.finale[0], T.finale[1]));
   const finaleY = useTransform(finaleO, (v) => (1 - v) * 24);
   const finalePE = useTransform(finaleO, (v) => (v > 0.5 ? "auto" : "none"));
@@ -497,22 +516,31 @@ function Overlays({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number; h
         <p className="display text-2xl text-sand sm:text-4xl">Settled in safely with the rest of your system.</p>
       </motion.div>
 
-      {/* Finale */}
+      {/* Finale: "just shipped" lands first, then the headline and call to action on the next bit of scroll */}
       <motion.div
         className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-sand"
-        style={{ opacity: finaleO, y: finaleY, pointerEvents: finalePE }}
+        style={{ pointerEvents: finalePE }}
       >
-        <h3 className="display max-w-4xl text-[2.2rem] text-balance sm:text-6xl lg:text-7xl">
-          Software that works <span className="text-blaze">as hard as you do.</span>
-        </h3>
-        <p className="mt-5 max-w-lg text-sm leading-relaxed text-sand/75 sm:text-base">
-          Made with you, cared for at every step, and looked after long after launch. Bring me your idea and let's take
-          it the rest of the way together.
-        </p>
-        <ButtonLink href="/contact" variant="accent" size="lg" className="mt-8">
-          Let's build it together
-          <ArrowUpRight className="h-4 w-4" />
-        </ButtonLink>
+        <motion.p
+          style={{ opacity: shippedO }}
+          className="mb-6 inline-flex items-center gap-2 rounded-full bg-sand/10 px-4 py-1.5 text-sm font-medium text-sand"
+        >
+          <Check className="h-4 w-4 text-blaze" strokeWidth={3} aria-hidden />
+          Software, just shipped.
+        </motion.p>
+        <motion.div className="flex flex-col items-center" style={{ opacity: finaleO, y: finaleY }}>
+          <h3 className="display max-w-4xl text-[2.2rem] text-balance sm:text-6xl lg:text-7xl">
+            Software that works <span className="text-blaze">as hard as you do.</span>
+          </h3>
+          <p className="mt-5 max-w-lg text-sm leading-relaxed text-sand/75 sm:text-base">
+            Made with you, cared for at every step, and looked after long after launch. Bring me your idea and let's take
+            it the rest of the way together.
+          </p>
+          <ButtonLink href="/contact" variant="accent" size="lg" className="mt-8">
+            Let's build it together
+            <ArrowUpRight className="h-4 w-4" />
+          </ButtonLink>
+        </motion.div>
       </motion.div>
     </>
   );
@@ -575,11 +603,11 @@ export function Journey() {
   if (reduced) return <StaticJourney />;
 
   return (
-    <section id="top" ref={ref} aria-labelledby="hero-title" data-nav-reveal={T.finale[0]} className="relative h-[900vh]">
+    <section id="top" ref={ref} aria-labelledby="hero-title" data-nav-reveal={T.shipped[0]} className="relative h-[1000vh]">
       <h1 id="hero-title" className="sr-only">
         {HERO_TITLE}
       </h1>
-      <span id="process" aria-hidden className="absolute left-0" style={{ top: "440vh" }} />
+      <span id="process" aria-hidden className="absolute left-0" style={{ top: "495vh" }} />
       <div className="sticky top-0 h-screen overflow-hidden">
         <Stage key={`${w}x${h}`} p={scrollYProgress} w={w} h={h} />
       </div>

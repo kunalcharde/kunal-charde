@@ -30,6 +30,9 @@
   --animate-spin-slow: spin 90s linear infinite;
   --animate-spin-rev: spin-rev 60s linear infinite;
   --animate-marquee: marquee 40s linear infinite;
+  --animate-sea-drift: sea-drift 16s linear infinite;
+  --animate-wake: wake-flow 1.1s linear infinite;
+  --animate-ripple: ripple 2.4s ease-out infinite;
   --animate-scroll-wheel: scroll-wheel 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
   --animate-chevron: chevron 1.8s ease-in-out infinite;
   --animate-cue-in: cue-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.4s both;
@@ -42,6 +45,29 @@
   @keyframes spin-rev {
     to {
       transform: rotate(-360deg);
+    }
+  }
+  /* Water: drifting sea surface, foam flowing away from the ship, ripples spreading from the hull */
+  @keyframes sea-drift {
+    to {
+      background-position:
+        160px 320px,
+        -120px 240px;
+    }
+  }
+  @keyframes wake-flow {
+    to {
+      stroke-dashoffset: -48;
+    }
+  }
+  @keyframes ripple {
+    0% {
+      transform: scale(0.75);
+      opacity: 0.55;
+    }
+    100% {
+      transform: scale(1.35);
+      opacity: 0;
     }
   }
   /* Scroll cue: wheel dot rolling down a mouse outline, chevrons cascading, and a delayed entrance */
