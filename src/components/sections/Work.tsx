@@ -8,9 +8,9 @@ import { ProjectMockup } from "../visuals/Mockups";
 import { projectPanel } from "../visuals/panels";
 
 const glance = [
-  { n: "20+", label: "products I've helped build" },
-  { n: "3+", label: "years shipping to production" },
-  { n: String(domains.length), label: "industries, from law to health" },
+  { n: "4+", label: "years shipping software" },
+  { n: "25+", label: "projects shipped" },
+  { n: "9+", label: "sectors worked in" },
 ];
 
 // Page rhythm: a wide feature, two side by side, then a wide one mirrored.

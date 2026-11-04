@@ -1,8 +1,23 @@
-import { Check, GraduationCap } from "lucide-react";
-import { domains, experience } from "../../data/content";
+import { Check } from "lucide-react";
+import { domains } from "../../data/content";
 import { Emblem } from "../ui/Crosshairs";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
+
+// The track record, told through what's been built rather than who it was built for.
+const highlights = [
+  {
+    n: "4+",
+    label: "Years shipping software",
+    text: "From first prototypes to platforms people use every day, taken all the way to production and looked after afterwards.",
+  },
+  {
+    n: "25+",
+    label: "Projects shipped",
+    text: "Enterprise CRMs, AI legal research, knowledge assistants, healthcare apps, fintech websites and mobile apps.",
+  },
+  { n: "9+", label: "Sectors worked in", text: "Different worlds, same care. A few of them:" },
+];
 
 // Things I can help you with, phrased as what we'd make together.
 const strengths = [
@@ -34,9 +49,9 @@ export function About() {
               matters to them, and slowly turning it into something real that people can use.
             </p>
             <p>
-              Over the past three years I've helped build more than 20 products in legal tech, healthcare, fintech, enterprise
-              CRM and AI, inside a deep-tech venture studio and alongside client teams. Every one of them taught me that good
-              software comes from listening first.
+              Over the past four years I've shipped more than 25 projects across legal tech, healthcare, fintech, enterprise
+              CRM and AI, working alongside founders, product teams and enterprise clients. Every one of them taught me that
+              good software comes from listening first.
             </p>
             <p className="font-medium text-mirage">
               Your product might start as yours, but once we begin, it becomes a little bit mine too. I'll care about the
@@ -61,42 +76,27 @@ export function About() {
         <Reveal delay={0.1} className="lg:pt-6">
           <div className="relative overflow-hidden rounded-[22px] bg-mirage p-7 text-sand sm:p-8">
             <Emblem className="absolute -top-10 -right-10 h-44 w-44 text-sand/[0.05]" />
-            <p className="label text-sand/60">Experience</p>
-            <ol className="relative mt-6">
-              {experience.map((e, i) => (
-                <li key={e.org} className="relative pb-7 pl-7 last:pb-0">
-                  {i < experience.length - 1 && <span className="absolute top-3 bottom-0 left-[5px] w-px bg-sand/15" aria-hidden />}
-                  <span
-                    className={`absolute top-1.5 left-0 h-[11px] w-[11px] rounded-full ${i === 0 ? "bg-blaze" : "border border-sand/40"}`}
-                    aria-hidden
-                  />
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-3">
-                    <p className="label text-sm">{e.org}</p>
-                    <p className="font-mono text-xs text-sand/50">{e.period}</p>
+            <p className="label relative text-sand/60">The journey so far</p>
+            <ul className="relative mt-4 divide-y divide-sand/10">
+              {highlights.map((h, i) => (
+                <li key={h.label} className="py-6 last:pb-0">
+                  <div className="flex items-baseline gap-4">
+                    <span className="display text-4xl text-blaze sm:text-5xl">{h.n}</span>
+                    <span className="label text-[13px]">{h.label}</span>
                   </div>
-                  <p className="mt-1.5 text-sm text-sand/65">{e.role}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-sand/70">{h.text}</p>
+                  {i === highlights.length - 1 && (
+                    <ul className="mt-4 flex flex-wrap gap-1.5">
+                      {domains.map((d) => (
+                        <li key={d} className="rounded-full border border-sand/20 px-2.5 py-1 text-xs text-sand/80">
+                          {d}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
-            </ol>
-
-            <div className="mt-8 flex items-start gap-3 border-t border-sand/15 pt-6">
-              <GraduationCap className="mt-0.5 h-5 w-5 shrink-0 text-blaze" aria-hidden />
-              <div>
-                <p className="text-sm font-medium">B.E., Electronics &amp; Communication</p>
-                <p className="mt-0.5 text-sm text-sand/60">RTM Nagpur University · 2022</p>
-              </div>
-            </div>
-
-            <div className="mt-6 border-t border-sand/15 pt-6">
-              <p className="label text-sand/60">Domains</p>
-              <ul className="mt-4 flex flex-wrap gap-1.5">
-                {domains.map((d) => (
-                  <li key={d} className="rounded-full border border-sand/20 px-2.5 py-1 text-xs text-sand/80">
-                    {d}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            </ul>
           </div>
         </Reveal>
       </div>
