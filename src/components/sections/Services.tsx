@@ -26,7 +26,7 @@ function CardBody({ s, i }: { s: Service; i: number }) {
       <div className="flex min-w-0 flex-col">
         <div className="flex items-center justify-between gap-4">
           <span className="label text-[11px] opacity-70">Services</span>
-          <span className="font-mono text-sm opacity-70">({String(i + 1).padStart(2, "0")})</span>
+          <span className="font-sans font-medium tabular-nums text-sm opacity-70">({String(i + 1).padStart(2, "0")})</span>
         </div>
         <h3 className="display mt-6 text-[1.45rem] text-balance break-words sm:text-4xl lg:text-5xl">{s.title}</h3>
         <p className={`mt-5 max-w-xl text-[15px] leading-relaxed sm:text-lg ${t.muted}`}>{s.description}</p>

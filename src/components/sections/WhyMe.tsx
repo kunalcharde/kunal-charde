@@ -42,7 +42,7 @@ export function WhyMe() {
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-blaze/10 text-blaze-ink transition-colors group-hover:bg-blaze group-hover:text-white">
                     <Icon className="h-[18px] w-[18px]" aria-hidden />
                   </span>
-                  <span className="font-mono text-xs opacity-40">0{i + 1}</span>
+                  <span className="font-sans font-medium tabular-nums text-xs opacity-40">0{i + 1}</span>
                 </div>
                 <h3 className="label mt-6 text-sm">{r.title}</h3>
                 <p className="mt-2.5 text-sm leading-relaxed text-muted transition-colors group-hover:text-sand/70">{r.description}</p>

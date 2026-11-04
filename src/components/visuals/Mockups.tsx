@@ -80,7 +80,7 @@ function LegalMockup() {
               <div className="flex items-center gap-1.5">
                 <Gavel className="h-2.5 w-2.5 text-blaze" />
                 <span className="text-[9.5px] font-medium text-slate-200">{r.court}</span>
-                <span className="ml-auto font-mono text-[8.5px] text-sand/45">{r.cite}</span>
+                <span className="ml-auto font-sans font-medium tabular-nums text-[8.5px] text-sand/45">{r.cite}</span>
               </div>
               <div className="mt-2 space-y-1">
                 <Line w="96%" />
@@ -107,7 +107,7 @@ function LegalMockup() {
           <p className="mt-1 text-[9px] text-sand/45">Key holdings</p>
           {[1, 2, 3].map((n) => (
             <div key={n} className="flex items-start gap-1.5">
-              <span className="rounded bg-blaze/20 px-1 font-mono text-[8px] text-blaze">[{n}]</span>
+              <span className="rounded bg-blaze/20 px-1 font-sans font-medium tabular-nums text-[8px] text-blaze">[{n}]</span>
               <div className="flex-1 space-y-1 pt-0.5">
                 <Line w="94%" />
                 <Line w={`${50 + n * 12}%`} />
@@ -190,7 +190,7 @@ function HealthMockup() {
           <p className="text-[9px] text-sand/45">Good morning</p>
           <Line w="55%" className="h-2.5 bg-slate-400/60" />
           <div className="mt-1 rounded-xl bg-gradient-to-br from-blaze/60 via-sea/50 to-transparent p-3">
-            <p className="font-mono text-[8px] tracking-wider text-white uppercase">Health ID</p>
+            <p className="font-sans font-medium tabular-nums text-[8px] tracking-wider text-white uppercase">Health ID</p>
             <Line w="70%" className="mt-2 bg-white/40" />
             <Line w="45%" className="mt-1.5 bg-white/25" />
           </div>

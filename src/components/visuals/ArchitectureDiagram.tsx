@@ -143,7 +143,7 @@ export function ArchitectureDiagram({ layers, flow }: Props) {
                       }`}
                     >
                       <p
-                        className={`font-mono text-[10px] tracking-[0.18em] uppercase transition-colors duration-500 ${
+                        className={`font-sans font-medium tabular-nums text-[10px] tracking-[0.18em] uppercase transition-colors duration-500 ${
                           on ? "text-blaze" : "text-sand/45"
                         }`}
                       >
@@ -176,7 +176,7 @@ export function ArchitectureDiagram({ layers, flow }: Props) {
         {/* Narration */}
         <div className="flex flex-col border-t border-mirage/10 p-6 lg:border-t-0 lg:border-l">
           <p className="label text-[11px] text-subtle">How a request moves through it</p>
-          <p className="mt-5 font-mono text-sm">
+          <p className="mt-5 font-sans font-medium tabular-nums text-sm">
             <span className="text-2xl text-blaze-ink">{String(step + 1).padStart(2, "0")}</span>
             <span className="text-subtle"> / {String(flow.length).padStart(2, "0")}</span>
           </p>
@@ -195,7 +195,7 @@ export function ArchitectureDiagram({ layers, flow }: Props) {
                   {at.map((i, k) => (
                     <span key={i} className="flex items-center gap-1.5">
                       {k > 0 && <span aria-hidden>→</span>}
-                      <span className="rounded-full bg-blaze/10 px-2 py-0.5 font-mono text-blaze-ink">{layers[i].name}</span>
+                      <span className="rounded-full bg-blaze/10 px-2 py-0.5 font-sans font-medium tabular-nums text-blaze-ink">{layers[i].name}</span>
                     </span>
                   ))}
                 </p>

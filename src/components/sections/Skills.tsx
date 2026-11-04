@@ -22,7 +22,7 @@ export function Skills() {
               <Reveal delay={(i % 3) * 0.05} className="flex h-full flex-col p-7">
                 <div className="flex items-baseline justify-between">
                   <h3 className="label text-[13px]">{g.title}</h3>
-                  <span className={`font-mono text-[11px] ${i === 2 ? "text-sand/60" : "text-blaze-ink"}`}>
+                  <span className={`font-sans font-medium tabular-nums text-[11px] ${i === 2 ? "text-sand/60" : "text-blaze-ink"}`}>
                     {String(g.items.length).padStart(2, "0")}
                   </span>
                 </div>

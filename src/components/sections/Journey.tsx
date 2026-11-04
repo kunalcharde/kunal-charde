@@ -234,7 +234,7 @@ function SideScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number; 
           />
         ))}
         <div
-          className="absolute flex items-center justify-center bg-mirage font-mono text-[10px] tracking-[0.25em] text-sand"
+          className="absolute flex items-center justify-center bg-mirage font-sans font-medium tabular-nums text-[10px] tracking-[0.25em] text-sand"
           style={{ left: legL - legW, top: g.beamY, width: legR - legL + legW * 3, height: g.beamH }}
         >
           CI/CD
@@ -275,7 +275,7 @@ function SideScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number; 
               />
             ))}
           </span>
-          <span className="font-mono text-[10px] tracking-[0.35em] text-sand/60 uppercase">Scroll</span>
+          <span className="font-sans font-medium tabular-nums text-[10px] tracking-[0.35em] text-sand/60 uppercase">Scroll</span>
         </div>
       </motion.div>
 
@@ -318,7 +318,7 @@ function Gate({ p, g, i, y }: { p: MotionValue<number>; g: Geo; i: number; y: nu
           background: "repeating-linear-gradient(90deg,#FF5B04 0 10px,#F7FAFB 10px 20px)",
         }}
       />
-      <div className="absolute font-mono text-[10px] text-mirage/50" style={{ left: g.cx - g.rw / 2 - 40, top: y + 10 }}>
+      <div className="absolute font-sans font-medium tabular-nums text-[10px] text-mirage/50" style={{ left: g.cx - g.rw / 2 - 40, top: y + 10 }}>
         {g.mobile ? "" : `0${i + 1}`}
       </div>
       {/* Milestone card */}
@@ -327,7 +327,7 @@ function Gate({ p, g, i, y }: { p: MotionValue<number>; g: Geo; i: number; y: nu
         style={{ left: g.cx + g.rw / 2 + (g.mobile ? 12 : 44), top: y - cardH / 2, width: g.cardW, minHeight: cardH }}
       >
         <div className="flex items-baseline justify-between">
-          <span className="font-mono text-xs text-blaze-ink">0{i + 1}</span>
+          <span className="font-sans font-medium tabular-nums text-xs text-blaze-ink">0{i + 1}</span>
           <span className="font-sans text-[10px] font-semibold tracking-wider text-subtle uppercase">Checkpoint</span>
         </div>
         <h3 className="display mt-2 text-xl sm:text-2xl">{m.title}</h3>
@@ -336,7 +336,7 @@ function Gate({ p, g, i, y }: { p: MotionValue<number>; g: Geo; i: number; y: nu
           <motion.span className="flex h-5 w-5 items-center justify-center rounded-full" style={{ background: checkBg, color: checkColor }}>
             <Check className="h-3 w-3" strokeWidth={3} />
           </motion.span>
-          <span className="font-mono text-[11px] text-mirage/70">{m.check}</span>
+          <span className="font-sans font-medium tabular-nums text-[11px] text-mirage/70">{m.check}</span>
         </div>
       </div>
     </>
@@ -546,7 +546,7 @@ function StaticJourney() {
         <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {milestones.map((m, i) => (
             <li key={m.title} className="rounded-[16px] border border-mirage/15 bg-paper p-6">
-              <span className="font-mono text-xs text-blaze-ink">0{i + 1}</span>
+              <span className="font-sans font-medium tabular-nums text-xs text-blaze-ink">0{i + 1}</span>
               <h3 className="display mt-2 text-2xl">{m.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{m.description}</p>
             </li>

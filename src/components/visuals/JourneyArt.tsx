@@ -68,7 +68,7 @@ export function SideContainer({ label, sub, color = C.blaze, ink = C.mirage }: {
         {label}
       </text>
       {sub && (
-        <text x="243" y="85" textAnchor="middle" fill={ink} opacity=".6" fontSize="11" fontFamily="var(--font-mono)">
+        <text x="243" y="85" textAnchor="middle" fill={ink} opacity=".6" fontSize="11" fontFamily="var(--font-sans)">
           {sub}
         </text>
       )}
@@ -99,7 +99,7 @@ export function TopContainer({ color = C.blaze, label }: { color?: string; label
         <rect key={i} x={8 + i * 12} y="3" width="4" height="42" fill="#000" opacity=".1" />
       ))}
       {label && (
-        <text x="70" y="29" textAnchor="middle" fill={C.mirage} fontSize="12" fontWeight="700" fontFamily="var(--font-mono)">
+        <text x="70" y="29" textAnchor="middle" fill={C.mirage} fontSize="12" fontWeight="700" fontFamily="var(--font-sans)">
           {label}
         </text>
       )}
@@ -167,7 +167,7 @@ export function TopShip() {
               fill={d.c === C.mirage3 || d.c === C.sea ? C.sand : C.mirage}
               fontSize="11"
               fontWeight="700"
-              fontFamily="var(--font-mono)"
+              fontFamily="var(--font-sans)"
             >
               {d.l}
             </text>

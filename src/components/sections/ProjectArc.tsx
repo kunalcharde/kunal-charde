@@ -28,7 +28,7 @@ function NoteCard({ note, i }: { note: Note; i: number }) {
     <div className={`flex h-full flex-col rounded-[22px] p-6 shadow-[0_28px_50px_-30px_rgba(22,35,42,0.55)] ${tones[i % tones.length]}`}>
       <div className="flex items-center justify-between gap-3">
         <span className="label text-[10px] opacity-70">{note.sector}</span>
-        <span className="font-mono text-[11px] opacity-50">{String(i + 1).padStart(2, "0")}</span>
+        <span className="font-sans font-medium tabular-nums text-[11px] opacity-50">{String(i + 1).padStart(2, "0")}</span>
       </div>
       <p className="mt-6 text-[17px] leading-snug sm:text-lg">{note.text}</p>
       <span className="mt-auto inline-flex self-start rounded-full border border-current/25 px-2.5 py-1 text-[11px] opacity-80">{note.kind}</span>

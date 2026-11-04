@@ -79,7 +79,7 @@ export function Hero() {
 
       <div className="bg-mirage text-sand">
         <div className="border-t border-sand/10">
-          <ul className="container-page flex flex-wrap gap-x-8 gap-y-2 py-5 font-mono text-[11px] tracking-wider text-sand/55 uppercase">
+          <ul className="container-page flex flex-wrap gap-x-8 gap-y-2 py-5 font-sans font-medium tabular-nums text-[11px] tracking-wider text-sand/55 uppercase">
             {highlights.map((h) => (
               <li key={h} className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 bg-blaze" aria-hidden />

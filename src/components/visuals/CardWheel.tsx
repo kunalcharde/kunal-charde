@@ -51,7 +51,7 @@ const cards: Card[] = [
         <div className="mt-3 space-y-1.5">
           {["Ingest", "Embed", "Retrieve", "Answer + cite"].map((s, i) => (
             <div key={s} className="flex items-center gap-1.5 text-[0.6em]">
-              <span className="font-mono opacity-60">0{i + 1}</span>
+              <span className="font-sans font-medium tabular-nums opacity-60">0{i + 1}</span>
               <span className="h-px flex-1 bg-sand/30" />
               {s}
             </div>
@@ -148,7 +148,7 @@ const cards: Card[] = [
     fg: "text-sand",
     corner: "OPS",
     body: (
-      <div className="w-full px-1 font-mono text-[0.58em] leading-relaxed">
+      <div className="w-full px-1 font-sans font-medium tabular-nums text-[0.58em] leading-relaxed">
         <p className="text-blaze">● deploy</p>
         <p className="opacity-70">docker · nginx</p>
         <p className="opacity-70">ec2 · ecs · rds · s3</p>
@@ -195,7 +195,7 @@ export function CardWheel() {
           <defs>
             <path id="dial-ring" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0" />
           </defs>
-          <text fontSize="7.5" letterSpacing="3.2" fill="currentColor" fontFamily="var(--font-mono)">
+          <text fontSize="7.5" letterSpacing="3.2" fill="currentColor" fontFamily="var(--font-sans)">
             <textPath href="#dial-ring">KUNAL CHARDE · PORTFOLIO · FULL-STACK · AI · AUTOMATION · CLOUD ·</textPath>
           </text>
         </svg>

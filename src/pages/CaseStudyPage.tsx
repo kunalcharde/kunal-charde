@@ -38,7 +38,7 @@ function useActiveChapter() {
 function Chapter({ id, n, title, children }: { id: string; n: string; title: string; children: ReactNode }) {
   return (
     <section id={id} aria-labelledby={`${id}-title`} className="scroll-mt-28 border-t border-mirage/15 pt-12 pb-16 first:border-t-0 first:pt-0">
-      <p className="font-mono text-xs text-blaze-ink">{n}</p>
+      <p className="font-sans font-medium tabular-nums text-xs text-blaze-ink">{n}</p>
       <h2 id={`${id}-title`} className="display mt-2 text-3xl break-words sm:text-4xl">
         {title}
       </h2>
@@ -80,7 +80,7 @@ export function CaseStudyPage() {
           </div>
           <div>
             <ProjectMockup kind={study.mockup} />
-            <p className="mt-3 font-mono text-[10px] opacity-60">Illustrative mockup. Real screens stay private.</p>
+            <p className="mt-3 font-sans font-medium tabular-nums text-[10px] opacity-60">Illustrative mockup. Real screens stay private.</p>
           </div>
         </div>
       </header>
@@ -101,7 +101,7 @@ export function CaseStudyPage() {
             <dd className="mt-3">
               <ul className="flex flex-wrap gap-1.5">
                 {study.stack.map((t) => (
-                  <li key={t} className="rounded-full bg-mirage px-2.5 py-1 font-mono text-[11px] text-sand">
+                  <li key={t} className="rounded-full bg-mirage px-2.5 py-1 font-sans font-medium tabular-nums text-[11px] text-sand">
                     {t}
                   </li>
                 ))}
@@ -129,7 +129,7 @@ export function CaseStudyPage() {
                       active === c.id ? "border-blaze font-medium text-mirage" : "border-transparent text-muted hover:text-mirage"
                     }`}
                   >
-                    <span className="font-mono text-xs text-blaze-ink">{c.n}</span>
+                    <span className="font-sans font-medium tabular-nums text-xs text-blaze-ink">{c.n}</span>
                     {c.title}
                   </a>
                 </li>
@@ -157,7 +157,7 @@ export function CaseStudyPage() {
               <ul className="mt-5 divide-y divide-mirage/10">
                 {detail.challenges.map((c, i) => (
                   <li key={c} className="flex gap-4 py-3 text-[15px] leading-relaxed">
-                    <span className="w-6 shrink-0 font-mono text-xs leading-[1.7rem] text-blaze-ink">0{i + 1}</span>
+                    <span className="w-6 shrink-0 font-sans font-medium tabular-nums text-xs leading-[1.7rem] text-blaze-ink">0{i + 1}</span>
                     {c}
                   </li>
                 ))}
@@ -172,7 +172,7 @@ export function CaseStudyPage() {
                   {i < detail.approach.length - 1 && (
                     <span aria-hidden className="absolute top-10 bottom-0 left-[19px] w-px bg-mirage/15" />
                   )}
-                  <span className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-mirage font-mono text-xs text-sand">
+                  <span className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-mirage font-sans font-medium tabular-nums text-xs text-sand">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="pt-1.5">
@@ -207,7 +207,7 @@ export function CaseStudyPage() {
             <span aria-hidden className="display absolute -top-6 right-6 text-[9rem] leading-none text-blaze/25">
               "
             </span>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-blaze uppercase">Looking back</p>
+            <p className="font-sans font-medium tabular-nums text-[11px] tracking-[0.2em] text-blaze uppercase">Looking back</p>
             <p className="relative mt-5 text-xl leading-relaxed sm:text-2xl sm:leading-relaxed">{detail.reflection}</p>
           </blockquote>
         </div>

@@ -9,7 +9,7 @@ export function BrowserFrame({ url, children }: { url: string; children: ReactNo
           <span className="h-2.5 w-2.5 rounded-full bg-slate-700" />
           <span className="h-2.5 w-2.5 rounded-full bg-slate-700" />
         </div>
-        <div className="mx-auto w-full max-w-[220px] truncate rounded-md bg-white/[0.04] px-3 py-1 text-center font-mono text-[10px] text-sand/45">
+        <div className="mx-auto w-full max-w-[220px] truncate rounded-md bg-white/[0.04] px-3 py-1 text-center font-sans font-medium tabular-nums text-[10px] text-sand/45">
           {url}
         </div>
         <div className="w-[42px]" />

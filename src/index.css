@@ -7,7 +7,6 @@
 @theme {
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "Archivo Variable", "Geist Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --color-mirage: #16232a;
   --color-mirage-2: #1e2f37;
@@ -147,7 +146,7 @@
     @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
   }
   .eyebrow {
-    @apply inline-flex items-center gap-2 font-mono text-[11px] font-medium tracking-[0.18em] text-muted uppercase;
+    @apply inline-flex items-center gap-2 font-sans text-[11px] font-medium tracking-[0.18em] text-muted uppercase tabular-nums;
   }
   .section-title {
     @apply display text-[2.1rem] text-balance sm:text-5xl md:text-6xl;

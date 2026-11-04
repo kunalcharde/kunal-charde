@@ -17,7 +17,7 @@ function SlideChrome({ children, tone, tag }: { children: ReactNode; tone: "ligh
         <span className="label text-[8px]">{tag}</span>
       </div>
       <div className="relative flex-1">{children}</div>
-      <div className={`flex justify-between font-mono text-[8px] tracking-widest uppercase ${dim}`}>
+      <div className={`flex justify-between font-sans font-medium tabular-nums text-[8px] tracking-widest uppercase ${dim}`}>
         <span>Portfolio</span>
         <span>Full-stack · AI</span>
       </div>
@@ -54,7 +54,7 @@ const slides: { cls: string; node: ReactNode }[] = [
         <div className="absolute inset-0 flex flex-col justify-center">
           {["Discover", "Architect", "Build", "Deploy"].map((w, i) => (
             <div key={w} className="flex items-baseline gap-[3%] border-b border-sand/10 py-[0.6%]">
-              <span className="w-[5%] font-mono text-[clamp(8px,0.8vw,11px)] text-blaze">0{i + 1}</span>
+              <span className="w-[5%] font-sans font-medium tabular-nums text-[clamp(8px,0.8vw,11px)] text-blaze">0{i + 1}</span>
               <span className={`display text-[clamp(1.4rem,4.1vw,3.6rem)] ${i > 1 ? "text-outline text-sand/70" : ""}`}>{w}</span>
             </div>
           ))}
@@ -115,7 +115,7 @@ const slides: { cls: string; node: ReactNode }[] = [
             {["Legal tech", "Healthcare", "Enterprise CRM", "FinTech", "AI infrastructure"].map((d, i) => (
               <div key={d} className="flex justify-between border-t border-sand/10 py-[1.2%] text-[clamp(8px,0.85vw,11px)]">
                 <span className="label text-[clamp(8px,0.85vw,11px)]">{d}</span>
-                <span className="font-mono opacity-50">0{i + 1}</span>
+                <span className="font-sans font-medium tabular-nums opacity-50">0{i + 1}</span>
               </div>
             ))}
           </div>
@@ -134,7 +134,7 @@ const slides: { cls: string; node: ReactNode }[] = [
           <div className="grid grid-cols-3 gap-[4%]">
             {["Scrape & normalize judgments", "Index, search & summarize", "Answer on web & WhatsApp"].map((s, i) => (
               <div key={s} className="border-t border-sand/25 pt-[6%] text-[clamp(8px,0.85vw,11px)] leading-snug">
-                <span className="mb-1 block font-mono text-blaze">0{i + 1}</span>
+                <span className="mb-1 block font-sans font-medium tabular-nums text-blaze">0{i + 1}</span>
                 {s}
               </div>
             ))}
@@ -155,7 +155,7 @@ const slides: { cls: string; node: ReactNode }[] = [
             <div className="w-[85%] rounded-lg border border-mirage/15 bg-paper px-[6%] py-[5%]">
               <div className="h-1.5 w-full rounded-full bg-mirage/25" />
               <div className="mt-1.5 h-1.5 w-[70%] rounded-full bg-mirage/25" />
-              <span className="mt-2 inline-block rounded bg-blaze/15 px-1.5 py-0.5 font-mono text-[clamp(6px,0.6vw,8px)] text-blaze-ink">
+              <span className="mt-2 inline-block rounded bg-blaze/15 px-1.5 py-0.5 font-sans font-medium tabular-nums text-[clamp(6px,0.6vw,8px)] text-blaze-ink">
                 policy.pdf · p.4
               </span>
             </div>
@@ -247,7 +247,7 @@ export function Showreel() {
             {s.node}
           </ArcSlide>
         ))}
-        <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[10px] tracking-[0.2em] text-mirage/50 uppercase">
+        <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 font-sans font-medium tabular-nums text-[10px] tracking-[0.2em] text-mirage/50 uppercase">
           Scroll ↓
         </div>
       </div>
