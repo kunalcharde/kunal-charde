@@ -39,13 +39,13 @@ export function About() {
             eyebrow="About"
             title={
               <>
-                I build your product like it's <span className="text-blaze">my own.</span>
+                Hi, this is <span className="text-blaze">Kunal.</span>
               </>
             }
           />
           <Reveal delay={0.05} className="mt-8 space-y-5 text-base leading-relaxed text-muted sm:text-lg">
             <p>
-              Hi, I'm Kunal. I'm a software engineer, and what I love most is sitting with someone's idea, understanding why it
+              I'm a software engineer, and what I love most is sitting with someone's idea, understanding why it
               matters to them, and slowly turning it into something real that people can use.
             </p>
             <p>
