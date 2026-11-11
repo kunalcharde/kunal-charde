@@ -7,7 +7,6 @@ import { ButtonLink } from "../ui/Button";
 import { Emblem } from "../ui/Crosshairs";
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
   // Hidden while the opening story plays; the hero section says where to reveal it via data-nav-reveal (0–1 of its scroll).
@@ -20,7 +19,6 @@ export function Navbar() {
   useEffect(() => {
     setOpen(false);
     const onScroll = () => {
-      setScrolled(window.scrollY > 12);
       const story = document.querySelector<HTMLElement>("[data-nav-reveal]");
       if (story) {
         const at = story.offsetTop + Number(story.dataset.navReveal) * (story.offsetHeight - window.innerHeight);
@@ -57,9 +55,9 @@ export function Navbar() {
   return (
     <header
       inert={hidden}
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled || open || pathname !== "/" ? "border-b border-line bg-sand/85 backdrop-blur-xl" : "border-b border-transparent"
-      } ${hidden ? "pointer-events-none -translate-y-full opacity-0" : ""}`}
+      className={`fixed inset-x-0 top-0 z-50 border-b border-line bg-sand/90 backdrop-blur-xl transition-all duration-500 ${
+        hidden ? "pointer-events-none -translate-y-full opacity-0" : ""
+      }`}
     >
       <nav className="container-page flex h-16 items-center justify-between" aria-label="Primary">
         <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
