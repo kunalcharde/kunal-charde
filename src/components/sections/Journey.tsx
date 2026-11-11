@@ -1,6 +1,6 @@
-import { useMemo, useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
-import { ArrowUpRight, Check } from "lucide-react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { ArrowUpRight, Check, RotateCcw } from "lucide-react";
 import { milestones, profile, services } from "../../data/content";
 import { useViewport } from "../../lib/useViewport";
 import { ButtonLink } from "../ui/Button";
@@ -42,6 +42,9 @@ const T = {
   shipped: [0.935, 0.95],
   finale: [0.955, 0.98],
 } as const;
+
+const SEA_TEXTURE =
+  "repeating-linear-gradient(170deg,rgba(228,238,240,0.05) 0 2px,transparent 2px 46px),repeating-linear-gradient(10deg,rgba(0,0,0,0.08) 0 1px,transparent 1px 38px)";
 
 const HERO_TITLE = `${profile.name}, ${profile.role}. Turning ideas into scalable digital products, together.`;
 
@@ -395,8 +398,7 @@ function WorldScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number;
           style={{
             top: g.seaTop,
             height: worldH - g.seaTop,
-            backgroundImage:
-              "repeating-linear-gradient(170deg,rgba(228,238,240,0.05) 0 2px,transparent 2px 46px),repeating-linear-gradient(10deg,rgba(0,0,0,0.08) 0 1px,transparent 1px 38px)",
+            backgroundImage: SEA_TEXTURE,
           }}
         />
         <div className="absolute inset-x-0 h-2 bg-mirage-3" style={{ top: g.seaTop - 2 }} />
@@ -601,13 +603,94 @@ function StaticJourney() {
   );
 }
 
+/**
+ * Shown in place of the story once a visitor has watched it to the end, so scrolling back up never rewinds the ship.
+ * It matches the story's final frame (same sea, same words), so the swap is invisible.
+ */
+function ShippedHero({ onReplay }: { onReplay: () => void }) {
+  return (
+    <div
+      className="relative flex min-h-screen animate-sea-drift flex-col items-center justify-center overflow-hidden bg-sea px-6 pt-16 pb-12 text-center text-sand"
+      style={{ backgroundImage: SEA_TEXTURE }}
+    >
+      {/* Ripples spreading slowly across the water */}
+      <span aria-hidden className="absolute top-1/2 left-1/2 h-[70vmin] w-[70vmin] -translate-x-1/2 -translate-y-1/2">
+        <span className="absolute inset-0 animate-ripple rounded-full border-2 border-sand/10 [animation-duration:5s]" />
+        <span className="absolute inset-0 animate-ripple rounded-full border-2 border-sand/10 [animation-delay:2.5s] [animation-duration:5s]" />
+      </span>
+
+      <p className="relative mb-6 inline-flex items-center gap-2 rounded-full bg-sand/10 px-4 py-1.5 text-sm font-medium">
+        <Check className="h-4 w-4 text-blaze" strokeWidth={3} aria-hidden />
+        Software, just shipped.
+      </p>
+      <h2 className="display relative max-w-4xl text-[2.2rem] text-balance sm:text-6xl lg:text-7xl">
+        Software that works <span className="text-blaze">as hard as you do.</span>
+      </h2>
+      <p className="relative mt-5 max-w-lg text-sm leading-relaxed text-sand/75 sm:text-base">
+        Made with you, cared for at every step, and looked after long after launch. Bring me your idea and let's take it
+        the rest of the way together.
+      </p>
+      <div className="relative mt-8 flex flex-col items-center gap-3 sm:flex-row">
+        <ButtonLink href="/contact" variant="accent" size="lg">
+          Let's build it together
+          <ArrowUpRight className="h-4 w-4" />
+        </ButtonLink>
+        <button
+          type="button"
+          onClick={onReplay}
+          className="inline-flex h-13 items-center gap-2 rounded-full border border-sand/25 px-6 text-[15px] font-medium transition-colors hover:border-sand hover:bg-sand hover:text-mirage"
+        >
+          <RotateCcw className="h-4 w-4" aria-hidden />
+          Replay the journey
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// Remembered while the visitor moves around the site; a reload or fresh visit plays the story again.
+let journeyFinished = false;
+
 export function Journey() {
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const { w, h } = useViewport();
+  const [finished, setFinished] = useState(journeyFinished);
+  const justFinished = useRef(false);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    if (finished || v < 0.99) return;
+    journeyFinished = true;
+    justFinished.current = true;
+    setFinished(true);
+  });
+
+  // The long story collapses to one screen; put the visitor exactly where the finale was so nothing jumps.
+  useLayoutEffect(() => {
+    if (!finished || !justFinished.current || !ref.current) return;
+    justFinished.current = false;
+    window.scrollTo({ top: ref.current.offsetTop, behavior: "instant" });
+  }, [finished]);
+
+  const replay = () => {
+    journeyFinished = false;
+    setFinished(false);
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
+
   if (reduced) return <StaticJourney />;
+
+  if (finished) {
+    return (
+      <section id="top" ref={ref} aria-labelledby="hero-title">
+        <h1 id="hero-title" className="sr-only">
+          {HERO_TITLE}
+        </h1>
+        <ShippedHero onReplay={replay} />
+      </section>
+    );
+  }
 
   return (
     <section id="top" ref={ref} aria-labelledby="hero-title" data-nav-reveal={T.shipped[0]} className="relative h-[1000vh]">
