@@ -19,6 +19,8 @@ import { SHIP, SideContainer, SideTruck, TopContainer, TopShip, TopTruck } from 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const seg = (p: number, a: number, b: number) => clamp01((p - a) / (b - a));
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+// Gentler in-out curve for the ship, so it sails at an even pace instead of darting through the middle.
+const sine = (t: number) => (1 - Math.cos(Math.PI * t)) / 2;
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 // Scroll timeline (fractions of the section's scroll distance).
@@ -34,11 +36,11 @@ const T = {
   reveal: [0.42, 0.47],
   travel: [0.42, 0.85],
   heading: [0.55, 0.58, 0.82, 0.85],
-  transfer: [0.855, 0.89],
-  panSea: [0.875, 0.92],
-  sail: [0.89, 0.955],
-  shipped: [0.96, 0.97],
-  finale: [0.97, 0.99],
+  transfer: [0.855, 0.885],
+  panSea: [0.86, 0.888],
+  sail: [0.888, 0.965],
+  shipped: [0.935, 0.95],
+  finale: [0.955, 0.98],
 } as const;
 
 const HERO_TITLE = `${profile.name}, ${profile.role}. Turning ideas into scalable digital products, together.`;
@@ -92,6 +94,11 @@ function geometry(w: number, h: number) {
   const slotCyRel = ((SHIP.row0 + 3 + SHIP.slotH / 2) / SHIP.h) * shipH;
   const shipY = truckEndY - slotCyRel;
   const seaTop = shipY - h * 0.06;
+  // Ship's screen position once the truck has stopped: pan just enough that it sits near the top, fully in view,
+  // then sail exactly far enough to clear the bottom edge, so it leaves right as the finale begins.
+  const shipTopOnScreen = h * 0.45 - slotCyRel;
+  const panSeaPx = Math.max(0, shipTopOnScreen - h * 0.08);
+  const sailDist = h - (shipTopOnScreen - panSeaPx) + 40;
 
   const firstGate = y0 + R + h * 0.5;
   const lastGate = seaTop - h * 0.45;
@@ -99,7 +106,7 @@ function geometry(w: number, h: number) {
   const cardW = mobile ? w - (cx + rw / 2 + 14) - 14 : Math.min(380, w * 0.3);
 
   return {
-    h, mobile, TW, TH, groundY, truckX, CW, CH, conX, restTop, beamY, beamH, liftTop, panTo, panBy,
+    h, panSeaPx, sailDist, mobile, TW, TH, groundY, truckX, CW, CH, conX, restTop, beamY, beamH, liftTop, panTo, panBy,
     cx, rw, y0, R, xStart, Lh, La, L, pierY, truckLen, truckWid, S, truckEndY,
     shipW, shipH, shipX, shipY, slotCx, slotCyRel, seaTop, gates, cardW,
   };
@@ -125,7 +132,7 @@ const camera = (g: Geo, p: number) => {
   const truckY = pathAt(g, travelS(g, p)).y;
   // Keep the truck ~45% down the screen once it's past the turn, then drift down over the sea at the end.
   const follow = Math.min(Math.max(0, truckY - g.h * 0.45), g.truckEndY - g.h * 0.45);
-  return follow + ease(seg(p, T.panSea[0], T.panSea[1])) * (g.mobile ? 0.45 : 0.55) * g.h;
+  return follow + sine(seg(p, T.panSea[0], T.panSea[1])) * g.panSeaPx;
 };
 
 /* ------------------------------------------------------------------ */
@@ -355,8 +362,8 @@ function WorldScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number;
 
   const transferT = useTransform(p, (v) => ease(seg(v, T.transfer[0], T.transfer[1])));
   const onTruck = useTransform(transferT, (t) => (t > 0 ? 0 : 1));
-  const sail = useTransform(p, (v) => ease(seg(v, T.sail[0], T.sail[1])));
-  const shipDY = useTransform(sail, (s) => s * h * 1.7);
+  const sail = useTransform(p, (v) => sine(seg(v, T.sail[0], T.sail[1])));
+  const shipDY = useTransform(sail, (s) => s * g.sailDist);
   const wakeO = useTransform(sail, (s) => Math.min(1, s * 8));
   const shipDX = useTransform(sail, (s) => s * s * (g.mobile ? w * 0.1 : w * 0.06));
 
@@ -476,7 +483,7 @@ function WorldScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number;
 
 function Overlays({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number; h: number }) {
   const headingO = useTransform(p, [...T.heading], [0, 1, 1, 0]);
-  const portO = useTransform(p, [0.84, 0.86, 0.89, 0.91], [0, 1, 1, 0]);
+  const portO = useTransform(p, [0.84, 0.86, 0.885, 0.9], [0, 1, 1, 0]);
   const shippedO = useTransform(p, (v) => seg(v, T.shipped[0], T.shipped[1]));
   const finaleO = useTransform(p, (v) => seg(v, T.finale[0], T.finale[1]));
   const finaleY = useTransform(finaleO, (v) => (1 - v) * 24);
