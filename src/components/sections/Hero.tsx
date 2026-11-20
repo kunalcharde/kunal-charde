@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { Link } from "react-router";
 import { profile } from "../../data/content";
 import { Crosshairs, Emblem } from "../ui/Crosshairs";

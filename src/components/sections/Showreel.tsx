@@ -1,5 +1,5 @@
 import { useRef, type ReactNode } from "react";
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { m as motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useViewport } from "../../lib/useViewport";
 import { Emblem } from "../ui/Crosshairs";
 

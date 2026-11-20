@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m as motion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { navLinks, profile } from "../../data/content";

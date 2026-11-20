@@ -8,10 +8,11 @@ const base =
   "group inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 disabled:pointer-events-none disabled:opacity-60 whitespace-nowrap active:scale-[0.98]";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-mirage text-sand hover:bg-blaze hover:text-white",
-  accent: "bg-blaze text-white hover:bg-mirage",
+  // Text on orange is always the dark navy: white on this orange is too faint to read comfortably (3.1:1).
+  primary: "bg-mirage text-sand hover:bg-blaze hover:text-mirage",
+  accent: "bg-blaze text-mirage hover:bg-mirage hover:text-sand",
   secondary: "border border-mirage/25 text-mirage hover:border-mirage hover:bg-mirage hover:text-sand",
-  light: "bg-sand text-mirage hover:bg-blaze hover:text-white",
+  light: "bg-sand text-mirage hover:bg-blaze hover:text-mirage",
 };
 
 const sizes: Record<Size, string> = {

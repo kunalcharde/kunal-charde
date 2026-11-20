@@ -1,4 +1,4 @@
-import { motion, type MotionValue } from "framer-motion";
+import { m as motion, type MotionValue } from "framer-motion";
 
 // Flat vector artwork for the "How your idea ships" story, drawn in the site palette.
 

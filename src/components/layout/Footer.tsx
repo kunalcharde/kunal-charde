@@ -38,7 +38,7 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer">
-            <p className="label text-sand/50">Navigate</p>
+            <p className="label text-sand/60">Navigate</p>
             <ul className="mt-4 space-y-2.5">
               {[{ label: "Home", href: "/" }, ...navLinks].map((l) => (
                 <li key={l.href}>
@@ -51,7 +51,7 @@ export function Footer() {
           </nav>
 
           <div>
-            <p className="label text-sand/50">Elsewhere</p>
+            <p className="label text-sand/60">Elsewhere</p>
             <ul className="mt-4 space-y-2.5">
               <li>
                 <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-sand/70 transition-colors hover:text-blaze">
@@ -73,13 +73,15 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Oversized wordmark, cropped by the page edge */}
-      <p aria-hidden className="display -mb-[0.18em] text-center text-[8.6vw] leading-[0.8] whitespace-nowrap text-sand/[0.07] select-none">
-        Kunal Charde
-      </p>
+      {/* Oversized wordmark, cropped by the page edge. Pure decoration, so it is drawn as decoration (CSS content)
+          rather than text: screen readers and contrast checkers rightly skip it. */}
+      <p
+        aria-hidden
+        className="display -mb-[0.18em] text-center text-[8.6vw] leading-[0.8] whitespace-nowrap text-sand/[0.07] select-none before:content-['Kunal_Charde']"
+      />
 
       <div className="border-t border-sand/10">
-        <div className="container-page flex flex-col-reverse gap-4 py-5 text-xs text-sand/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="container-page flex flex-col-reverse gap-4 py-5 text-xs text-sand/60 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {profile.name}. All rights reserved.
           </p>

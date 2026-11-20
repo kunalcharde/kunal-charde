@@ -1,11 +1,14 @@
 import { lazy, Suspense, useEffect } from "react";
-import { MotionConfig } from "framer-motion";
+import { LazyMotion, MotionConfig } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
 import { BrowserRouter, Outlet, Route, Routes, useLocation } from "react-router";
 import { Footer } from "./components/layout/Footer";
 import { Navbar } from "./components/layout/Navbar";
 import { TrustBar } from "./components/sections/TrustBar";
 import { Home } from "./pages/Home";
+
+// Animation features arrive in their own small file after the first paint, so the page shows sooner.
+const loadMotionFeatures = () => import("./lib/motionFeatures").then((m) => m.default);
 
 // The home page loads eagerly; the other pages are split out so the story paints fast.
 const WorkPage = lazy(() => import("./pages/WorkPage").then((m) => ({ default: m.WorkPage })));
@@ -65,6 +68,7 @@ function Layout() {
 
 export default function App() {
   return (
+    <LazyMotion features={loadMotionFeatures} strict>
     <MotionConfig reducedMotion="user">
       <BrowserRouter>
         <Routes>
@@ -79,5 +83,6 @@ export default function App() {
         </Routes>
       </BrowserRouter>
     </MotionConfig>
+    </LazyMotion>
   );
 }

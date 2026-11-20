@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { domains } from "../../data/content";
 import { Emblem } from "../ui/Crosshairs";

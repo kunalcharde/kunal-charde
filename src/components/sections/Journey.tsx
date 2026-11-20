@@ -1,5 +1,5 @@
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { m as motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { ArrowUpRight, Check, RotateCcw } from "lucide-react";
 import { milestones, profile, services } from "../../data/content";
 import { useViewport } from "../../lib/useViewport";
@@ -191,9 +191,9 @@ function SideScene({ p, g, w, h }: { p: MotionValue<number>; g: Geo; w: number; 
           />
           <motion.div style={{ opacity: bandO }} className="absolute inset-x-0" >
             <div className="container-page grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-end" style={{ paddingTop: h * 0.07 }}>
-              <h3 className="display text-[1.6rem] text-sand sm:text-4xl">
+              <h2 className="display text-[1.6rem] text-sand sm:text-4xl">
                 Everything your idea needs. <span className="text-sand/35">Looked after by one person.</span>
-              </h3>
+              </h2>
               <p className="hidden max-w-md text-sm leading-relaxed text-sand/65 lg:block">
                 Web apps, AI, backend, automation, cloud and mobile. Whatever your idea needs, we shape it together, and I
                 look after every piece of it with real care.

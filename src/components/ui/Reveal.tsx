@@ -1,4 +1,4 @@
-import { motion, type HTMLMotionProps } from "framer-motion";
+import { m as motion, type HTMLMotionProps } from "framer-motion";
 
 type RevealProps = HTMLMotionProps<"div"> & { delay?: number; y?: number };
 

@@ -1,5 +1,5 @@
 import { useId, useState, type FormEvent, type ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m as motion } from "framer-motion";
 import { ArrowUpRight, CheckCircle2, Copy, Loader2, Mail, TriangleAlert } from "lucide-react";
 import { budgets, profile, projectTypes } from "../../data/content";
 import { contactDeliveryConfigured, submitContact, validateContact, type ContactErrors, type ContactPayload } from "../../lib/contact";
